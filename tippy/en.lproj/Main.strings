@@ -1,0 +1,36 @@
+
+/* Class = "UILabel"; text = "2"; ObjectID = "3Cy-ds-GXF"; */
+"3Cy-ds-GXF.text" = "2";
+
+/* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "3NA-tO-RNz"; */
+"3NA-tO-RNz.title" = "Settings";
+
+/* Class = "UILabel"; text = "="; ObjectID = "4JF-56-9fl"; */
+"4JF-56-9fl.text" = "=";
+
+/* Class = "UILabel"; text = "$0.00"; ObjectID = "4yv-P6-xj1"; */
+"4yv-P6-xj1.text" = "$0.00";
+
+/* Class = "UILabel"; text = "+"; ObjectID = "ASZ-wC-APG"; */
+"ASZ-wC-APG.text" = "+";
+
+/* Class = "UILabel"; text = "$0.00"; ObjectID = "Yxi-Lh-sJd"; */
+"Yxi-Lh-sJd.text" = "$0.00";
+
+/* Class = "UILabel"; text = "$0.00"; ObjectID = "bH4-8B-czY"; */
+"bH4-8B-czY.text" = "$0.00";
+
+/* Class = "UISegmentedControl"; ouM-7c-st7.segmentTitles[0] = "18%"; ObjectID = "ouM-7c-st7"; */
+"ouM-7c-st7.segmentTitles[0]" = "18%";
+
+/* Class = "UISegmentedControl"; ouM-7c-st7.segmentTitles[1] = "20%"; ObjectID = "ouM-7c-st7"; */
+"ouM-7c-st7.segmentTitles[1]" = "20%";
+
+/* Class = "UISegmentedControl"; ouM-7c-st7.segmentTitles[2] = "25%"; ObjectID = "ouM-7c-st7"; */
+"ouM-7c-st7.segmentTitles[2]" = "25%";
+
+/* Class = "UISegmentedControl"; ouM-7c-st7.segmentTitles[3] = "0%"; ObjectID = "ouM-7c-st7"; */
+"ouM-7c-st7.segmentTitles[3]" = "0%";
+
+/* Class = "UINavigationItem"; title = "Tip Calculator"; ObjectID = "s7s-f9-3E4"; */
+"s7s-f9-3E4.title" = "Tip Calculator";
