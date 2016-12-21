@@ -9,7 +9,7 @@ tippy of your  is a tip calculator application for iOS.
 
 Submitted by: Chupeng Guan
 
-Time spent: 12 hours spent in total
+Time spent: 16 hours spent in total
 
 ## User Stories
 
