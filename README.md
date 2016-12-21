@@ -1,5 +1,6 @@
 # tippy
 iOS Pre-work: Tip Calculator App 
+
 Update:
 Remembering the bill amount across app restarts (if <10mins)
 Choose default tip percentage segment
