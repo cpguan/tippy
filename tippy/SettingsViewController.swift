@@ -16,6 +16,9 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var changeTheme: UISwitch!
     
+    @IBOutlet weak var setDefaultSeg: UISegmentedControl!
+    
+    
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
@@ -30,10 +33,17 @@ class SettingsViewController: UIViewController {
         } else {
             changeTheme.setOn(true, animated: true)
         }
-        
+        setDefaultSeg.selectedSegmentIndex = defaults.integer(forKey: "SegIndex")
         
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func SetSeg(_ sender: UISegmentedControl) {
+        let setSegIndex = setDefaultSeg.selectedSegmentIndex
+        defaults.set(setSegIndex, forKey: "SegIndex")
+        //defaults.synchronize()
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -42,21 +52,21 @@ class SettingsViewController: UIViewController {
         let tipVal = defaults.float(forKey: "tips")
         otherTipValSlide.value = tipVal*0.01
         otherTipValLable.text = String(format: "%.0f", tipVal)
-    }
+        setDefaultSeg.selectedSegmentIndex = defaults.integer(forKey: "SegIndex")    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("view did appear")
+        //print("view did appear")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("view will disappear")
+        //print("view will disappear")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("view did disappear")
+        //print("view did disappear")
     }
     
 

@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     var tip : Double = 0
     var total : Double = 0
     var shareAmount : Double = 0
+    var checkIndex : Int = 0
     
     let lightTextColor = UIColor(red: 0/255, green: 0/255, blue: 225/255, alpha: 1.0)
     let lightHeaderColor = UIColor(red: 237/255, green: 243/255, blue: 250/255, alpha: 1.0)
@@ -60,10 +61,13 @@ class ViewController: UIViewController {
         
         let tipVal = defaults.integer(forKey: "tips")
         
+        // tipControl.selectedSegmentIndex = defaults.integer(forKey: "SegIndex")
         tipControl.setTitle("15%", forSegmentAt: 0)
         tipControl.setTitle("20%", forSegmentAt: 1)
         tipControl.setTitle("25%", forSegmentAt: 2)
         tipControl.setTitle( String(tipVal)+"%", forSegmentAt: 3)
+        
+        checkLastAccess()
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -73,8 +77,14 @@ class ViewController: UIViewController {
         //print("view will appear")
         setTheme()
         let tipVal = defaults.integer(forKey: "tips")
-        tipControl.setTitle( String(tipVal)+"%", forSegmentAt: 3)
-        calTip()
+        if checkIndex == 1 {
+            tipControl.selectedSegmentIndex = defaults.integer(forKey: "lastSegmentIndex")
+            checkIndex = 0
+        } else {
+            tipControl.selectedSegmentIndex = defaults.integer(forKey: "SegIndex")
+            tipControl.setTitle( String(tipVal)+"%", forSegmentAt: 3)
+            calTip()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -125,11 +135,13 @@ class ViewController: UIViewController {
                         //tipControl.isHidden = false
                         self.ViewTip.alpha = 1
                         self.tipControl.alpha = 1
+                        
                     })
                 }
             }
         
         calTip()
+        
     }
     
     func calTip(){
@@ -141,12 +153,17 @@ class ViewController: UIViewController {
         
         let bill = NumberFormatter().number(from: billField.text!)?.doubleValue ?? 0
         
+        let lastAmount = billField.text
+        defaults.set(lastAmount, forKey: "lastFieldAmount")
+        defaults.synchronize()
+        
         let tip = bill * tipPercentage[tipControl.selectedSegmentIndex]
         let total = bill + tip
         
     
         let numpeople = Int(sharePeople.value)
         let shareAmount = total/Double(numpeople)
+        
         
         shareNumber.text = String(numpeople)
         
@@ -161,6 +178,36 @@ class ViewController: UIViewController {
         //shareLable.text = String(format: "$%.2f", shareAmount)
         let shareAmountVal = shareAmount as NSNumber
         shareLable.text = Nfmt.string(from: shareAmountVal)
+        
+        defaults.set(numpeople, forKey: "people")
+        
+        let lastSegIndex = tipControl.selectedSegmentIndex
+        defaults.set(lastSegIndex, forKey: "lastSegmentIndex")
+        
+        let lastAccess = Date()
+        defaults.set(lastAccess, forKey: "lastAccess")
+        
+        defaults.synchronize()
+    }
+    
+    func checkLastAccess(){
+        if let lastAccess = defaults.object(forKey: "lastAccess") as! Date? {
+            let timepass = Date().timeIntervalSince(lastAccess)
+            let duration = Int(timepass)
+            if duration < 600 {
+                if let lastAmount = defaults.object(forKey: "lastFieldAmount") as! String? {
+                    if lastAmount != Symbol {
+                        billField.text = lastAmount
+                        tipControl.selectedSegmentIndex = defaults.integer(forKey: "lastSegmentIndex")
+                        checkIndex = 1
+                        sharePeople.value = defaults.float(forKey: "people")
+                        calTip()
+                        ViewTip.alpha = 1
+                        tipControl.alpha = 1
+                    }
+                }
+            }
+        }
     }
     
     func setTheme(){
